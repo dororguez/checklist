@@ -1,0 +1,27 @@
+<script setup>
+import {defineEmits} from 'vue'
+
+const emit = defineEmits(['taskList'])
+const filterOptions = ['all', 'active', 'completed']
+
+function filterTask(filter) {
+  emit('onFilter', filter)
+}
+</script>
+
+<template>
+  <div class="relative inline-block">
+    <select
+        class="block appearance-none bg-gray-100 border border-gray-200 text-gray-700 py-1 pl-2 pr-4 rounded-lg shadow-sm focus:outline-none focus:bg-white focus:border-none focus:ring-2 focus:ring-indigo-500"
+
+        @change="filterTask($event.target.value)"
+    >
+      <option
+          v-for="(filterOption, index) in filterOptions"
+          :key="index"
+          :value="filterOption"
+      >{{ filterOption.toUpperCase() }}
+      </option>
+    </select>
+  </div>
+</template>
